@@ -1,9 +1,10 @@
 import os
 import argparse
 import heapq
+import struct
 
 class Node:
-    def __init__(self, valor,char):
+    def __init__(self, valor, char):
         self.valor = valor  
         self.char = char  
         self.esquerda = None  
@@ -21,36 +22,46 @@ def gerar_codigos(node, codigo_atual="", codigos={}):
             gerar_codigos(node.direita, codigo_atual + "1", codigos)
     return codigos
 
-def compactar(arquivo_entrada):
+def salvar_tabela_binaria(codigos, arquivo_saida):
+    arquivo_saida.write(struct.pack("I", len(codigos)))  
 
+    for char, codigo in codigos.items():
+        if char == "":  
+            arquivo_saida.write(struct.pack("B", 0))  
+        else:
+            arquivo_saida.write(struct.pack("B", ord(char)))
+
+        arquivo_saida.write(struct.pack("B", len(codigo)))
+
+        codigo_binario = int(codigo, 2)  
+
+        for i in range(len(codigo)):
+            bit = (codigo_binario >> (len(codigo) - i - 1)) & 1
+            arquivo_saida.write(struct.pack("B", bit)) 
+
+def compactar(arquivo_entrada):
     caracteres = {}
 
     with open(arquivo_entrada, "r") as arquivo:
         while True:
-
             caractere = arquivo.read(1)
-
+            valor = caracteres.get(caractere, 0)
+            caracteres[caractere] = valor + 1
             if not caractere:  
                 break
 
-            valor = caracteres.get(caractere,0)
-            valor = valor + 1
-            caracteres[caractere] = valor
-
     arvores = []
     for caractere, ocorrencias in caracteres.items():
-        no = Node(ocorrencias,caractere)
+        no = Node(ocorrencias, caractere)
         arvores.append(no)
 
     heapq.heapify(arvores)
 
     while len(arvores) > 1:
-
         esquerda = heapq.heappop(arvores)
         direita = heapq.heappop(arvores)
 
         n_arvore = Node(esquerda.valor + direita.valor, None)
-
         n_arvore.esquerda = esquerda
         n_arvore.direita = direita
 
@@ -60,10 +71,9 @@ def compactar(arquivo_entrada):
 
     codigos = gerar_codigos(raiz)
 
-    for char, codigo in codigos.items():
-        print(f"'{char}': {codigo}")
-
     with open("arquivo_codificado", "wb") as arquivo_saida:
+        salvar_tabela_binaria(codigos, arquivo_saida)
+
         with open(arquivo_entrada, "r") as arquivo:
             buffer = 0
             contagem_bits = 0
@@ -80,16 +90,15 @@ def compactar(arquivo_entrada):
                     contagem_bits += 1
 
                     if contagem_bits == 8:
-                        arquivo_saida.write(bytes([buffer]))
-                        buffer = 0  
-                        contagem_bits = 0  
+                        arquivo_saida.write(bytes([buffer])) 
+                        buffer = 0
+                        contagem_bits = 0
 
             if contagem_bits > 0:
-                buffer = buffer << (8 - contagem_bits)  
+                buffer = buffer << (8 - contagem_bits)
                 arquivo_saida.write(bytes([buffer]))
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
     parser.add_argument("entrada")
     args = parser.parse_args()
