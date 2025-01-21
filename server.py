@@ -1,8 +1,10 @@
 from flask import Flask, request, send_file
 from flask_cors import CORS
 from descompactador import descompactar 
-from compactador import compactador
+from compactador import compactar   
 
+app = Flask(__name__)
+CORS(app)
 
 @app.route('/compactar', methods=['POST'])
 def compactar_arquivo():
@@ -13,7 +15,7 @@ def compactar_arquivo():
 
     arquivo_path = "arquivo_temporario"
     arquivo.save(arquivo_path)
-    arquivo_codificado = '/tmp/arquivo_codificado'
+    arquivo_codificado = './arquivo_codificado'
 
     compactar(arquivo_path)
 
@@ -28,7 +30,7 @@ def descompactar_arquivo():
 
     arquivo_path = "arquivo_restaurado"
     arquivo.save(arquivo_path)
-    arquivo_restaurado = '/tmp/arquivo_restaurado'
+    arquivo_restaurado = './arquivo_restaurado'
 
     descompactar(arquivo_path, arquivo_restaurado)
 
