@@ -7,10 +7,10 @@
 |Matrícula | Aluno |
 | -- | -- |
 | 22/1022248  | Carlos Eduardo Mota Alves |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| 22/1021993  | Hugo Queiroz Camelo de Melo |
 
 ## Sobre 
-Descreva os objetivos do seu projeto e como ele funciona. 
+Este projeto tem como objetivo implementar o algoritmo de Huffman, um exemplo clássico de algoritmo ganancioso (greedy), para a compactação de arquivos. Por meio de uma interface gráfica, os usuários podem compactar e descompactar arquivos. 
 
 ## Screenshots
 Adicione 3 ou mais screenshots do projeto em funcionamento.
