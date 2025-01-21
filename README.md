@@ -18,8 +18,6 @@ Adicione 3 ou mais screenshots do projeto em funcionamento.
 ## Instalação 
 **Linguagem**: Python<br>
 **Framework**: Flask<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
-
 
 ## Pré-requisitos
 
@@ -51,10 +49,13 @@ Para utilizar o projeto, é necessário que todas as dependências estejam insta
    - Com as dependências já instaladas, execute o seguinte comando para iniciar o servidor backend:
      
      ```bash
-     python server.pys
+     python server.py
      ```
    - Isso iniciará o servidor Flask e manterá o backend ativo, (em `http://127.0.0.1:3000`).
 
+2. **Inicie o Fontend**.
+    - Vá até o a pasta raiz do projeto.
+    - Execute o arquivo **front.html**.
 
 2. **Utilizando Compactador e Descompactador**
    - Na interface do frontend, utilize os campos para inserir um arquivo.
