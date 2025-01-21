@@ -13,7 +13,10 @@
 Este projeto tem como objetivo implementar o algoritmo de Huffman, um exemplo clássico de algoritmo ganancioso (greedy), para a compactação de arquivos. Por meio de uma interface gráfica, os usuários podem compactar e descompactar arquivos. 
 
 ## Screenshots
-Adicione 3 ou mais screenshots do projeto em funcionamento.
+
+![link](foto1.png)
+
+![link](foto2.png)
 
 ## Instalação 
 **Linguagem**: Python<br>
