@@ -62,5 +62,8 @@ Para utilizar o projeto, é necessário que todas as dependências estejam insta
    - Em seguida, clique no botão para compactar ou descompactar.
    - O arquivo será baixado no seu computador.
 
+## Vídeo
+
+[Link](https://youtu.be/R2wIFJaEHgc)
 
 
